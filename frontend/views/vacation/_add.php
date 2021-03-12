@@ -37,7 +37,7 @@ use kartik\date\DatePicker;
         ])->label(false) ?>
     </div>
     <div class="col-md-3">
-        <?= $form->field($model, 'title')->textInput()->label(false) ?>
+        <?= $form->field($model, 'title')->textInput(['placeholder' => 'Описание'])->label(false) ?>
     </div>
     <div class="col-md-3">
         <?= Html::submitButton('Добавить', ['class' => 'btn btn-flat btn-default']) ?>
@@ -59,14 +59,14 @@ $js=<<<JS
                 type   : 'post',
                 data   : form.serialize(),
                 success: function (response){ 
-                    console.log(response);
                     $('#vacation-from').val('');
                     $('#vacation-to').val('');
                     $('#vacation-title').val('');
                     $.pjax.reload({container:'#grid-view-vacation'});
+                    $('ul.breadcrumb').after('<div id="w6-success-0" class="alert-success alert fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Отпуск добавлен</div>');
                 },
                 error  : function () {
-                    console.log('internal server error');
+                    $('ul.breadcrumb').after('<div id="w6-success-0" class="alert-danger alert fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Ошибка! попробуйте позже</div>');
                 }
             });
             return false;
