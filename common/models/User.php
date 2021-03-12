@@ -209,4 +209,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public static function isAdmin()
+    {
+        return (Yii::$app->user->id==1)?true:false;
+    }
 }
